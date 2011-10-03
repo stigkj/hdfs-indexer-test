@@ -1,0 +1,20 @@
+/.classpath
+/out/
+/.project
+/.settings/
+/build.properties
+/build/
+/.externalToolBuilders/
+/bin/
+/target/
+/.gradle/
+/lib/
+*.log
+/.vagrant
+.DS_Store
+
+# IDEA Editor files
+*.iml
+*.idea
+*.ipr
+*.iws
