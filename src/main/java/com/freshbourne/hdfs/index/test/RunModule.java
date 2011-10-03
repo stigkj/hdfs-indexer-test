@@ -22,7 +22,7 @@ public class RunModule extends CSVModule {
     }
 
     @java.lang.Override protected int csvColumn() {
-        return 3;
+        return 0;
     }
 
     @java.lang.Override protected java.lang.String delimiter() {

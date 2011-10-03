@@ -35,8 +35,21 @@ public class Main extends Configured implements Tool {
 		@Override
 		public void map(LongWritable key, Text value, Context context)
 				throws IOException, InterruptedException {
-            word.set(value.toString().split("|")[3]);
-            context.write(word, one);
+            String oId = value.toString().split("|")[0];
+            int orderId;
+            try{
+                orderId = Integer.parseInt(value.toString().split("|")[0]);
+            } catch (Exception e){
+                LOG.warn("coundn't parse fist part of line\n" + oId, e);
+                return;
+            }
+
+            LOG.debug("got order id " + oId);
+            
+            if(orderId < 10){
+                word.set("" + orderId);
+                context.write(word, one);
+            }
 		}
 	}
 
@@ -62,10 +75,11 @@ public class Main extends Configured implements Tool {
 		// configuration for indexing
 
 		Configuration conf = getConf();
-		conf.setClass("GuiceModule", RunModule.class, Serializable.class);
+
+        // these two must be set
+        conf.setClass("GuiceModule", RunModule.class, Serializable.class);
         conf.setClass("Index", CSVIndex.class, Serializable.class);
-		conf.setClass("Filter", Filter.class, Serializable.class);
-		conf.set("indexSavePath", "/tmp/index/");
+        
 		setConf(conf);
 		
 		Job job = new Job(conf, name);
