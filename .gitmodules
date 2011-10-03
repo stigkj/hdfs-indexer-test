@@ -10,3 +10,6 @@
 [submodule "cookbooks/gradle"]
 	path = cookbooks/gradle
 	url = git://github.com/rweng/chef-gradle-cookbook.git
+[submodule "cookbooks/tpch"]
+	path = cookbooks/tpch
+	url = git://github.com/rweng/chef-tpch-cookbook.git
