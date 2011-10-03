@@ -72,10 +72,10 @@ sourceSets {
 
 //************* OWN TASKS ********************
 
-task installTpch << {
-    "scripts/install_tpch.sh".execute().text
+task tpch << {
+    run("scripts/tpch.sh")
 }
-installTpch.description = 'Downloads and installs tpch on linux x86. Requires curl and gcc'
+tpch.description = 'Downloads and installs tpch on linux x86.'
 
 
 task runJar(dependsOn: jar) << {
