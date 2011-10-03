@@ -6,7 +6,7 @@ PERF_SUMMARY="build/perf_summary.csv"
 
 scripts/setupHdfs.sh
 START=$(date +%s)
-hadoop jar build/libs/hdfs-indexer-0.01.jar com.freshbourne.hdfs.index.run.PerformanceMain "${SAMPLE_FILE_HDFS}" false -Dmapred.child.java.opts=-Xmx1024M
+hadoop jar build/libs/hdfs-indexer-0.01.jar com.freshbourne.hdfs.index.test.PerformanceMain "${SAMPLE_FILE_HDFS}" false -Dmapred.child.java.opts=-Xmx1024M
 END=$(date +%s)
 DIFF_NO_INDEX=$(( $END - $START ))
 echo "LARGE,false,0,${DIFF_NO_INDEX}" >> $PERF_SUMMARY
@@ -17,7 +17,7 @@ for i in {1..5}; do
 	sleep 5
 	scripts/setupHdfs.sh
 	START=$(date +%s)
-	hadoop jar build/libs/hdfs-indexer-0.01.jar com.freshbourne.hdfs.index.run.PerformanceMain "${SAMPLE_FILE_HDFS}" true -Dmapred.child.java.opts=-Xmx1024M
+	hadoop jar build/libs/hdfs-indexer-0.01.jar com.freshbourne.hdfs.index.test.PerformanceMain "${SAMPLE_FILE_HDFS}" true -Dmapred.child.java.opts=-Xmx1024M
 	END=$(date +%s)
 	DIFF_INDEX=$(( $END - $START ))
 	echo "LARGE,true,${i},${DIFF_INDEX}" >> $PERF_SUMMARY
