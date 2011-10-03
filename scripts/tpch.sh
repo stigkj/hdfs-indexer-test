@@ -7,7 +7,7 @@ fi
 
 mkdir -p build
 cd build
-dbgen -T L -s 1
+dbgen -T L -s 0.1
 
 exit
 # not used anymore since we use the tpch cookbook
