@@ -15,7 +15,7 @@ hadoop jar build/libs/*.jar com.freshbourne.hdfs.index.test.Main "${SAMPLE_FILE_
 # make sure indexer was successfull
 if [ $? -ne 0 ];then
 	echo "hdfs-indexer failed!"
-	exit
+	exit -1
 fi
 
 # output the results

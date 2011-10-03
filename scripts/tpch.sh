@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 if [ ! -f build.gradle ];then
-	echo "please start the script from the root directory of the project"
+	echo "please start the script from the root directory of the project" 1>&2
 	exit -1
 fi
 
@@ -18,6 +18,6 @@ rm dbgen/makefile.suite
 cp ../cookbooks/tpch/templates/default/makefile.suite dbgen/
 cd dbgen
 make -f makefile.suite
-echo "generating: dbgen -T L -s 1 -v"
+echo "generating: dbgen -T L -s 1 -v" 1>&2
 ./dbgen -T L -s 1 -v
 mv lineitem.tbl ../
