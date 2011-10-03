@@ -35,14 +35,20 @@ public class Main extends Configured implements Tool {
 		@Override
 		public void map(LongWritable key, Text value, Context context)
 				throws IOException, InterruptedException {
-			LOG.info("\ngot key:\t" + key.toString() + "\ngot value:\t" + value.toString());
+            word.set(value.toString().split("|")[3]);
+            context.write(word, one);
 		}
 	}
 
 	public static class Reduce extends org.apache.hadoop.mapreduce.Reducer<Text, IntWritable, Text, IntWritable> {
 
-		public void reduce(Text key, Iterator<IntWritable> values, Context context)
+		public void reduce(Text key, Iterable<IntWritable> values, Context context)
 				throws IOException, InterruptedException {
+            int sum = 0;
+            for (IntWritable value : values)
+                sum++;
+            
+            context.write(key, new IntWritable(sum));
 		}
 	}
 

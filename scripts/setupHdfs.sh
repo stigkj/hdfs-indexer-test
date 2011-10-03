@@ -18,4 +18,5 @@ fi
 if [ $? -eq 0 ];then
 	hadoop fs -rmr /csv_output
 	hadoop fs -put $SAMPLE_FILE "$SAMPLE_FILE_HDFS"
+	exit 0 # put fails if $SAMPLE_FILE_HDFS does already exist
 fi

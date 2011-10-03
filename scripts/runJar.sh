@@ -3,7 +3,7 @@
 SAMPLE_FILE_HDFS="/test/lineitem.tbl"
 
 scripts/setupHdfs.sh
-if[ $? -ne 0 ]; then
+if [ $? -ne 0 ]; then
     echo "setting up the hdfs failed."
     exit
 fi
