@@ -7,10 +7,6 @@
  */
 package com.freshbourne.hdfs.index.test;
 
-import java.io.IOException;
-import java.io.Serializable;
-import java.util.Iterator;
-
 import com.freshbourne.hdfs.index.IndexedInputFormat;
 import com.freshbourne.hdfs.index.run.Filter;
 import org.apache.commons.logging.Log;
@@ -29,6 +25,10 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
+
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.Iterator;
 
 public class PerformanceMain extends Configured implements Tool {
 

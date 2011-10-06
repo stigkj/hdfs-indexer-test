@@ -16,19 +16,6 @@ dependencies {
     compile "commons-logging:commons-logging-api:1.0.4@jar"
 
     compile "log4j:log4j:1.2.16@jar"
-    // http://dl.dropbox.com/u/456244/multimap-0.01.jar
-    // a multimap project is required to exist beside this project
-    //compile fileTree(dir: '../multimap/build/libs', includes: ['*.jar'])
-    //compile "http://dl.dropbox.com/u/456244/multimap-0.01.jar"
-    // compile files("http://dl.dropbox.com/u/456244/multimap-0.01.jar")
-    compile('multimap:multimap:0.0.1') {
-        artifact {
-            name = 'multimap'
-            extension = 'jar'
-            url = 'http://dl.dropbox.com/u/456244/multimap-0.01.jar'
-            type = "jar"
-        }
-    }
 
 	compile('hdfs-indexer:hdfs-indexer:0.0.1') {
         artifact {
