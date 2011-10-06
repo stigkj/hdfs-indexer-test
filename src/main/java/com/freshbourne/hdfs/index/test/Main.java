@@ -2,17 +2,16 @@ package com.freshbourne.hdfs.index.test;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.*;
 
 import com.freshbourne.hdfs.index.CSVIndex;
 import com.freshbourne.hdfs.index.IndexedInputFormat;
-import com.freshbourne.hdfs.index.run.Filter;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.*;
+import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 
@@ -35,12 +34,12 @@ public class Main extends Configured implements Tool {
 		@Override
 		public void map(LongWritable key, Text value, Context context)
 				throws IOException, InterruptedException {
-            String oId = value.toString().split("|")[0];
+            String oId = value.toString().split("\\|")[0];
             int orderId;
             try{
-                orderId = Integer.parseInt(value.toString().split("|")[0]);
+                orderId = Integer.parseInt(oId);
             } catch (Exception e){
-                LOG.warn("coundn't parse fist part of line\n" + oId, e);
+                LOG.warn("coundn't parse fist part of line\n" + value, e);
                 return;
             }
 

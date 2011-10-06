@@ -15,7 +15,7 @@ if [ ! -f $SAMPLE_FILE ]; then
 fi
 
 
-if [ $? -nq 0 ];then
+if [ $? -ne 0 ];then
 	echo "script/tpch.sh returned unsuccessful. Aborting." 1>&2
 	exit -1
 fi
