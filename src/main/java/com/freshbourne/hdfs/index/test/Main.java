@@ -17,6 +17,8 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -29,8 +31,12 @@ public class Main extends Configured implements Tool {
 	public static class Map extends	Mapper<LongWritable, Text, Text, IntWritable> {
 		private final static IntWritable one = new IntWritable(1);
 		private Text word = new Text();
-		private static final Log LOG = LogFactory.getLog(Map.class);
+		private static final Logger LOG = Logger.getLogger(Map.class);
 
+		static {
+			Logger.getLogger("com.freshbourne").setLevel(Level.DEBUG);
+		}
+		
 		@Override
 		public void map(LongWritable key, Text value, Context context)
 				throws IOException, InterruptedException {

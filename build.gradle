@@ -50,11 +50,6 @@ sourceSets {
 			srcDir 'src/main/java'
 			}
 		}
-	test {
-		java {
-			srcDir 'src/test/java'
-			}
-	}
 }
 
 //************* OWN TASKS ********************
