@@ -1,9 +1,6 @@
 package com.freshbourne.hdfs.index.test;
 
-import com.freshbourne.hdfs.index.CSVIndex;
 import com.freshbourne.hdfs.index.IndexedInputFormat;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.fs.Path;
@@ -45,7 +42,7 @@ public class Main extends Configured implements Tool {
             try{
                 orderId = Integer.parseInt(oId);
             } catch (Exception e){
-                LOG.warn("coundn't parse fist part of line\n" + value, e);
+                LOG.warn("coundn't parse '" + oId + "', which is the fist part of line\n" + value, e);
                 return;
             }
 
@@ -83,7 +80,6 @@ public class Main extends Configured implements Tool {
 
         // these two must be set
         conf.setClass("GuiceModule", RunModule.class, Serializable.class);
-        conf.setClass("Index", CSVIndex.class, Serializable.class);
         
 		setConf(conf);
 		
