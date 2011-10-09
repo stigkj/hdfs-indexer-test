@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+if [ "${SF}" == "" ];then
+	SF=0.1
+fi
+
+
 if [ ! -f build.gradle ];then
 	echo "please start the script from the root directory of the project" 1>&2
 	exit -1
@@ -7,7 +12,7 @@ fi
 
 mkdir -p build
 cd build
-dbgen -T L -s 0.1
+dbgen -T L -s ${SF}
 
 exit
 # not used anymore since we use the tpch cookbook
