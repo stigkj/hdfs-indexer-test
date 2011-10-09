@@ -10,6 +10,7 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
+import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 import org.apache.hadoop.util.Tool;
@@ -25,13 +26,15 @@ import java.io.Serializable;
  */
 public class Main extends Configured implements Tool {
 
+	private boolean useIndex = true;
+
 	public static class Map extends	Mapper<LongWritable, Text, Text, IntWritable> {
 		private final static IntWritable one = new IntWritable(1);
 		private Text word = new Text();
 		private static final Logger LOG = Logger.getLogger(Map.class);
 
 		static {
-			Logger.getLogger("com.freshbourne").setLevel(Level.DEBUG);
+			// Logger.getLogger("com.freshbourne").setLevel(Level.DEBUG);
 		}
 		
 		@Override
@@ -92,11 +95,10 @@ public class Main extends Configured implements Tool {
 		job.setOutputKeyClass(Text.class);
 		job.setOutputValueClass(Text.class);
 
-		
 		job.setMapperClass(map);
 		job.setReducerClass(reduce);
 		
-		job.setInputFormatClass(IndexedInputFormat.class);
+		job.setInputFormatClass(useIndex ? IndexedInputFormat.class : TextInputFormat.class);
 		job.setOutputFormatClass(TextOutputFormat.class);
 
 		FileInputFormat.addInputPath(job, new Path(input));
@@ -108,13 +110,13 @@ public class Main extends Configured implements Tool {
 	@Override
 	public int run(String[] args) throws Exception {
 
-		if (args.length < 1) {
-			printUsage();
-			return 1;
-		}
-
 		String input = args[0];
+		if(args.length > 1){
+			useIndex = Boolean.parseBoolean(args[1]);
+		}
+		
 		return runJob("CSV", Map.class, Reduce.class, input,"/csv_output");
+
 	}
 
 	public static void main(String[] args) throws Exception {
