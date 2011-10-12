@@ -12,9 +12,12 @@ fi
 
 mkdir -p build
 cd build
+echo "dbgen: dbgen -T L -s ${SF}" 1>&2
 dbgen -T L -s ${SF}
 
 exit
+
+echo "should never appear, after exit in tpch.sh" 1>&2
 # not used anymore since we use the tpch cookbook
 curl "http://www.tpc.org/tpch/spec/tpch_2_14_0.tgz" -o "build/tpch_2_14_0.tgz"
 cd build

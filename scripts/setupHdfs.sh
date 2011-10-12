@@ -20,6 +20,7 @@ if [ $? -ne 0 ];then
 	exit -1
 fi
 
+echo "removing csv_output and samplefile from hadoop" 1>&2
 hadoop fs -rmr /csv_output
 hadoop fs -put $SAMPLE_FILE "$SAMPLE_FILE_HDFS"
 exit 0 # put fails if $SAMPLE_FILE_HDFS does already exist

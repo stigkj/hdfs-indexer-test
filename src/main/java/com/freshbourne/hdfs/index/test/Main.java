@@ -21,40 +21,39 @@ import org.apache.log4j.Logger;
 import java.io.IOException;
 import java.io.Serializable;
 
-/**
- * @author Robin Wenglewski <robin@wenglewski.de>
- */
+/** @author Robin Wenglewski <robin@wenglewski.de> */
 public class Main extends Configured implements Tool {
 
-	private boolean useIndex = true;
+	private              boolean useIndex = true;
+	private static final Logger  LOG      = Logger.getLogger(Map.class);
 
-	public static class Map extends	Mapper<LongWritable, Text, Text, IntWritable> {
-		private final static IntWritable one = new IntWritable(1);
-		private Text word = new Text();
-		private static final Logger LOG = Logger.getLogger(Map.class);
+	static {
+		Logger.getLogger("com.freshbourne").setLevel(Level.DEBUG);
+	}
 
-		static {
-			// Logger.getLogger("com.freshbourne").setLevel(Level.DEBUG);
-		}
-		
+	public static class Map extends Mapper<LongWritable, Text, Text, IntWritable> {
+		private final static IntWritable one  = new IntWritable(1);
+		private              Text        word = new Text();
+
+
 		@Override
 		public void map(LongWritable key, Text value, Context context)
 				throws IOException, InterruptedException {
-            String oId = value.toString().split("\\|")[0];
-            int orderId;
-            try{
-                orderId = Integer.parseInt(oId);
-            } catch (Exception e){
-                LOG.warn("coundn't parse '" + oId + "', which is the fist part of line\n" + value, e);
-                return;
-            }
+			String oId = value.toString().split("\\|")[0];
+			int orderId;
+			try {
+				orderId = Integer.parseInt(oId);
+			} catch (Exception e) {
+				LOG.warn("coundn't parse '" + oId + "', which is the fist part of line\n" + value, e);
+				return;
+			}
 
-            LOG.debug("got order id " + oId);
-            
-            if(orderId < 10){
-                word.set("" + orderId);
-                context.write(word, one);
-            }
+			LOG.debug("got order id " + oId);
+
+			if (orderId < 10) {
+				word.set("" + orderId);
+				context.write(word, one);
+			}
 		}
 	}
 
@@ -62,11 +61,11 @@ public class Main extends Configured implements Tool {
 
 		public void reduce(Text key, Iterable<IntWritable> values, Context context)
 				throws IOException, InterruptedException {
-            int sum = 0;
-            for (IntWritable value : values)
-                sum++;
-            
-            context.write(key, new IntWritable(sum));
+			int sum = 0;
+			for (IntWritable value : values)
+				sum++;
+
+			context.write(key, new IntWritable(sum));
 		}
 	}
 
@@ -75,20 +74,20 @@ public class Main extends Configured implements Tool {
 	}
 
 	private int runJob(String name, Class<? extends Map> map, Class<? extends Reduce> reduce,
-			String input, String output) throws Exception {
+	                   String input, String output) throws Exception {
 
 		// configuration for indexing
 
 		Configuration conf = getConf();
 
-        // these two must be set
-        conf.setClass("GuiceModule", RunModule.class, Serializable.class);
-        
+		// these two must be set
+		conf.setClass("GuiceModule", RunModule.class, Serializable.class);
+
 		setConf(conf);
-		
+
 		Job job = new Job(conf, name);
 		job.setJarByClass(Main.class);
-		
+
 		job.setMapOutputKeyClass(Text.class);
 		job.setMapOutputValueClass(IntWritable.class);
 
@@ -97,13 +96,13 @@ public class Main extends Configured implements Tool {
 
 		job.setMapperClass(map);
 		job.setReducerClass(reduce);
-		
+
 		job.setInputFormatClass(useIndex ? IndexedInputFormat.class : TextInputFormat.class);
 		job.setOutputFormatClass(TextOutputFormat.class);
 
 		FileInputFormat.addInputPath(job, new Path(input));
 		FileOutputFormat.setOutputPath(job, new Path(output));
-		
+
 		return job.waitForCompletion(true) ? 0 : 1;
 	}
 
@@ -111,11 +110,14 @@ public class Main extends Configured implements Tool {
 	public int run(String[] args) throws Exception {
 
 		String input = args[0];
-		if(args.length > 1){
+		if (args.length > 1) {
 			useIndex = Boolean.parseBoolean(args[1]);
 		}
-		
-		return runJob("CSV", Map.class, Reduce.class, input,"/csv_output");
+
+		LOG.debug("running main");
+		LOG.debug("input: " + input);
+		LOG.debug("useIndex: " + useIndex);
+		return runJob("CSV", Map.class, Reduce.class, input, "/csv_output");
 
 	}
 

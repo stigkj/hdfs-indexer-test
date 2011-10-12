@@ -15,12 +15,16 @@ export SF=1
 
 
 setup(){
+    echo "removing lineitem.tbl from build/ and hdfs" 1>&2
 	rm build/lineitem.tbl
 	hadoop fs -rm "/test/lineitem.tbl"
 	scripts/setupHdfs.sh
 }
 
 run(){
+    echo "running job:" 1>&2
+    echo "hadoop jar ${JAR} com.freshbourne.hdfs.index.test.Main "${SAMPLE_FILE_HDFS}" ${USE_INDEX} -Dmapred.child.java.opts=-Xmx${JAVA_MAX}M" 1>&2
+
 	START=$(date +%s)
 	JAR=`ls build/libs/*.jar -1t|head -n 1`
 	hadoop jar ${JAR} com.freshbourne.hdfs.index.test.Main "${SAMPLE_FILE_HDFS}" ${USE_INDEX} -Dmapred.child.java.opts=-Xmx${JAVA_MAX}M
