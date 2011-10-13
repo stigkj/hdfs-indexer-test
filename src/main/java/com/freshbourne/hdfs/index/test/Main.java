@@ -28,7 +28,7 @@ public class Main extends Configured implements Tool {
 	private static final Logger  LOG      = Logger.getLogger(Map.class);
 
 	static {
-		Logger.getLogger("com.freshbourne").setLevel(Level.DEBUG);
+		Logger.getLogger("com.freshbourne.hdfs").setLevel(Level.DEBUG);
 	}
 
 	public static class Map extends Mapper<LongWritable, Text, Text, IntWritable> {
