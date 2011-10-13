@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 SAMPLE_FILE_HDFS="/test/lineitem.tbl"
+export SF=0.1
 
 scripts/setupHdfs.sh
 if [ $? -ne 0 ]; then

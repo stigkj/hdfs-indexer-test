@@ -25,10 +25,11 @@ import java.io.Serializable;
 public class Main extends Configured implements Tool {
 
 	private              boolean useIndex = true;
-	private static final Logger  LOG      = Logger.getLogger(Map.class);
+	private static final Logger  LOG      = Logger.getLogger(Main.class);
 
 	static {
-		Logger.getLogger("com.freshbourne.hdfs").setLevel(Level.DEBUG);
+		// Logger.getLogger("com.freshbourne.hdfs").setLevel(Level.DEBUG);
+		// Logger.getLogger("com.freshbourne.io").setLevel(Level.DEBUG);
 	}
 
 	public static class Map extends Mapper<LongWritable, Text, Text, IntWritable> {
@@ -48,7 +49,8 @@ public class Main extends Configured implements Tool {
 				return;
 			}
 
-			LOG.debug("got order id " + oId);
+			if(LOG.isDebugEnabled())
+				LOG.debug("got order id " + oId);
 
 			if (orderId < 10) {
 				word.set("" + orderId);
@@ -117,6 +119,7 @@ public class Main extends Configured implements Tool {
 		LOG.debug("running main");
 		LOG.debug("input: " + input);
 		LOG.debug("useIndex: " + useIndex);
+
 		return runJob("CSV", Map.class, Reduce.class, input, "/csv_output");
 
 	}
