@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
 SAMPLE_FILE_HDFS="/test/lineitem.tbl"
-export SF=0.1
+RUN_SUMMARY="build/run_summary.csv"
+export SF=0.2
 
 scripts/setupHdfs.sh
 if [ $? -ne 0 ]; then
@@ -13,8 +14,12 @@ fi
 JAR=`ls build/libs/*.jar -1t|head -n 1`
 USE_INDEX=true
 JAVA_MAX=512
-hadoop jar ${JAR} com.freshbourne.hdfs.index.test.Main "${SAMPLE_FILE_HDFS}" ${USE_INDEX} -Dmapred.child.java.opts=-Xmx${JAVA_MAX}M
 
+START=$(date +%s)
+hadoop jar ${JAR} com.freshbourne.hdfs.index.test.Main "${SAMPLE_FILE_HDFS}" ${USE_INDEX} -Dmapred.child.java.opts=-Xmx${JAVA_MAX}M
+END=$(date +%s)
+DIFF=$(( $END - $START ))
+echo "${SF},${USE_INDEX},${JAVA_MAX},${DIFF}" > $RUN_SUMMARY
 
 # make sure indexer was successfull
 if [ $? -ne 0 ];then
