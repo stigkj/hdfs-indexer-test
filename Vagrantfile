@@ -29,7 +29,7 @@ Vagrant::Config.run do |config|
   # config.vm.share_folder "v-data", "/vagrant_data", "../data"
   
   config.vm.customize do |vm|
-    vm.memory_size = 1024
+    vm.memory_size = 2048
   end
 
   # Enable provisioning with Puppet stand alone.  Puppet manifests

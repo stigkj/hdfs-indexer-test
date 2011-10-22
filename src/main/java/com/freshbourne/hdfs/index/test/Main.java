@@ -2,6 +2,8 @@ package com.freshbourne.hdfs.index.test;
 
 import com.freshbourne.hdfs.index.BTreeIndex;
 import com.freshbourne.hdfs.index.IndexedInputFormat;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.fs.Path;
@@ -26,12 +28,10 @@ import java.io.Serializable;
 public class Main extends Configured implements Tool {
 
 	private              boolean useIndex = true;
-	private static final Logger  LOG      = Logger.getLogger(Main.class);
-
-	private static Logger btreeLogger;
+	private static final Log LOG      = LogFactory.getLog(Main.class);
 
 	static {
-		// LOG.setLevel(Level.DEBUG);
+		// Logger.getLogger(Main.class).setLevel(Level.DEBUG);
 	}
 
 	public static class Map extends Mapper<LongWritable, Text, Text, IntWritable> {
