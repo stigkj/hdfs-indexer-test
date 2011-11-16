@@ -14,7 +14,7 @@ mkdir -p build
 cd build
 echo "dbgen: dbgen -T L -s ${SF}" 1>&2
 dbgen -T L -s ${SF}
-
+echo "dbgen done" 1>&2
 exit
 
 echo "should never appear, after exit in tpch.sh" 1>&2

@@ -1,7 +1,7 @@
-package com.freshbourne.hdfs.index.test;
+package de.rwhq.hdfs.index.test;
 
-import com.freshbourne.hdfs.index.BTreeIndex;
-import com.freshbourne.hdfs.index.IndexedInputFormat;
+import de.rwhq.hdfs.index.IndexBuilder;
+import de.rwhq.hdfs.index.IndexedInputFormat;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.hadoop.conf.Configuration;
@@ -18,8 +18,6 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -29,10 +27,6 @@ public class Main extends Configured implements Tool {
 
 	private              boolean useIndex = true;
 	private static final Log LOG      = LogFactory.getLog(Main.class);
-
-	static {
-		// Logger.getLogger(Main.class).setLevel(Level.DEBUG);
-	}
 
 	public static class Map extends Mapper<LongWritable, Text, Text, IntWritable> {
 		private final static IntWritable one  = new IntWritable(1);
@@ -51,8 +45,7 @@ public class Main extends Configured implements Tool {
 				return;
 			}
 
-			if(LOG.isDebugEnabled())
-				LOG.debug("got order id " + oId);
+			// LOG.debug("got order id " + oId);
 
 			if (orderId < 10) {
 				word.set("" + orderId);
@@ -81,12 +74,9 @@ public class Main extends Configured implements Tool {
 	                   String input, String output) throws Exception {
 
 		// configuration for indexing
-
 		Configuration conf = getConf();
-
-		// these two must be set
-		conf.setClass("GuiceModule", RunModule.class, Serializable.class);
-
+		conf.setClass("indexBuilder", CustomBuilder.class, IndexBuilder.class);
+		
 		setConf(conf);
 
 		Job job = new Job(conf, name);

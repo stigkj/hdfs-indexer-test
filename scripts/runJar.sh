@@ -16,7 +16,7 @@ USE_INDEX=true
 JAVA_MAX=1536
 
 START=$(date +%s)
-hadoop jar ${JAR} com.freshbourne.hdfs.index.test.Main "${SAMPLE_FILE_HDFS}" ${USE_INDEX} -Dmapred.child.java.opts=-Xmx${JAVA_MAX}M
+hadoop jar ${JAR} de.rwhq.hdfs.index.test.Main "${SAMPLE_FILE_HDFS}" ${USE_INDEX} -Dmapred.child.java.opts=-Xmx${JAVA_MAX}M
 END=$(date +%s)
 DIFF=$(( $END - $START ))
 echo "${SF},${USE_INDEX},${JAVA_MAX},${DIFF}" > $RUN_SUMMARY

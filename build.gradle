@@ -10,26 +10,15 @@ repositories {
 }
 
 dependencies {
-    compile "org.apache.hadoop:hadoop-core:0.20.2@jar"
-
-    compile "commons-logging:commons-logging:1.0.4@jar"
-    compile "commons-logging:commons-logging-api:1.0.4@jar"
-
-    compile "log4j:log4j:1.2.16@jar"
-
-	compile('hdfs-indexer:hdfs-indexer:0.0.1') {
+    compile "org.apache.hadoop:hadoop-core:0.20.2"
+    compile('hdfs-indexer:hdfs-indexer:0.0.2') {
         artifact {
             name = 'hdfs-indexer'
             extension = 'jar'
-            url = 'http://dl.dropbox.com/u/456244/hdfs-indexer-0.0.1.jar'
+            url = 'http://dl.dropbox.com/u/456244/hdfs-indexer-0.0.2.jar'
             type = "jar"
         }
     }
-
-    compile "com.google.inject:guice:3.0@jar"
-    compile "javax.inject:javax.inject:1@jar" // dependency needed by guice
-    compile "aopalliance:aopalliance:1.0@jar"
-
 }
 
 //************* java plugin configuration ********************

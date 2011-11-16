@@ -25,10 +25,10 @@ run(){
 	JAR=`ls build/libs/*.jar -1t|head -n 1`
 
     echo "running job:" 1>&2
-    echo "hadoop jar ${JAR} com.freshbourne.hdfs.index.test.Main "${SAMPLE_FILE_HDFS}" ${USE_INDEX} -Dmapred.child.java.opts=-Xmx${JAVA_MAX}M" 1>&2
+    echo "hadoop jar ${JAR} de.rwhq.hdfs.index.test.Main "${SAMPLE_FILE_HDFS}" ${USE_INDEX} -Dmapred.child.java.opts=-Xmx${JAVA_MAX}M" 1>&2
 
 	START=$(date +%s)
-	hadoop jar ${JAR} com.freshbourne.hdfs.index.test.Main "${SAMPLE_FILE_HDFS}" ${USE_INDEX} -Dmapred.child.java.opts=-Xmx${JAVA_MAX}M
+	hadoop jar ${JAR} de.rwhq.hdfs.index.test.Main "${SAMPLE_FILE_HDFS}" ${USE_INDEX} -Dmapred.child.java.opts=-Xmx${JAVA_MAX}M
 	END=$(date +%s)
 	DIFF=$(( $END - $START ))
 	echo "${SF},${USE_INDEX},${i},${JAVA_MAX},${DIFF}" >> $PERF_SUMMARY
@@ -50,7 +50,7 @@ for i in {1..5}; do
 	sleep 5
 	scripts/setupHdfs.sh
 	START=$(date +%s)
-	hadoop jar build/libs/hdfs-indexer-0.01.jar com.freshbourne.hdfs.index.test.PerformanceMain "${SAMPLE_FILE_HDFS}" true -Dmapred.child.java.opts=-Xmx1024M
+	hadoop jar build/libs/hdfs-indexer-0.01.jar de.rwhq.hdfs.index.test.PerformanceMain "${SAMPLE_FILE_HDFS}" true -Dmapred.child.java.opts=-Xmx1024M
 	END=$(date +%s)
 	DIFF_INDEX=$(( $END - $START ))
 	echo "LARGE,true,${i},${DIFF_INDEX}" >> $PERF_SUMMARY
