@@ -2,7 +2,7 @@
 
 SAMPLE_FILE_HDFS="/test/lineitem.tbl"
 RUN_SUMMARY="build/run_summary.csv"
-export SF=1.0
+export SF=0.5
 
 scripts/setupHdfs.sh
 if [ $? -ne 0 ]; then
@@ -13,10 +13,11 @@ fi
 # use first jar in the libs directory and hope that it is the right one
 JAR=`ls build/libs/*.jar -1t|head -n 1`
 USE_INDEX=true
-JAVA_MAX=1536
+JAVA_MAX=1024
+JAVA_MIN=1024
 
 START=$(date +%s)
-hadoop jar ${JAR} de.rwhq.hdfs.index.test.Main "${SAMPLE_FILE_HDFS}" ${USE_INDEX} -Dmapred.child.java.opts=-Xmx${JAVA_MAX}M
+hadoop jar ${JAR} de.rwhq.hdfs.index.test.Main "${SAMPLE_FILE_HDFS}" ${USE_INDEX} -Dmapred.child.java.opts="-Xmx${JAVA_MAX}m -Xms${JAVA_MIN}m"
 END=$(date +%s)
 DIFF=$(( $END - $START ))
 echo "${SF},${USE_INDEX},${JAVA_MAX},${DIFF}" > $RUN_SUMMARY

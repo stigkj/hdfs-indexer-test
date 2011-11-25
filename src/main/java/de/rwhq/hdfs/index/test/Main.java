@@ -20,7 +20,6 @@ import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 
 import java.io.IOException;
-import java.io.Serializable;
 
 /** @author Robin Wenglewski <robin@wenglewski.de> */
 public class Main extends Configured implements Tool {
@@ -45,7 +44,7 @@ public class Main extends Configured implements Tool {
 				return;
 			}
 
-			// LOG.debug("got order id " + oId);
+			LOG.info("got order id " + oId);
 
 			if (orderId < 10) {
 				word.set("" + orderId);
@@ -96,7 +95,7 @@ public class Main extends Configured implements Tool {
 
 		FileInputFormat.addInputPath(job, new Path(input));
 		FileOutputFormat.setOutputPath(job, new Path(output));
-
+		
 		return job.waitForCompletion(true) ? 0 : 1;
 	}
 

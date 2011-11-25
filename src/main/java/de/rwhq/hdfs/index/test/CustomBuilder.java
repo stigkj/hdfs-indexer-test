@@ -13,12 +13,14 @@ public class CustomBuilder extends AbstractIndexBuilder {
 	@Override
 	public BTreeIndexBuilder configure(BTreeIndexBuilder bTreeIndexBuilder) {
 		new File("/tmp/index").mkdir();
+		
 		return bTreeIndexBuilder
 				.indexFolder("/tmp/index")
 				.addDefaultRange(new Range(0, 10))
-				.cacheSize(10 * 1000) // 10k lines + keys + nodes = 15MB
+				.cacheSize(25 * 1000)
+				.primaryIndex()
 				.keySerializer(IntegerSerializer.INSTANCE)
-				.keyExtractor(new IntegerCSVExtractor(0, "|"))
+				.keyExtractor(new IntegerCSVExtractor(0, "\\|"))
 				.comparator(IntegerComparator.INSTANCE);
 	}
 }
