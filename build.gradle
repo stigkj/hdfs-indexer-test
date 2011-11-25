@@ -58,7 +58,7 @@ task comparePerformance(dependsOn: jar) << {
 }
 
 task setupHdfs << {
-    run("scripts/setupHdfs.sh")
+    run("scripts/setup.sh")
 }
 runJar.description = 'trys to run the jar in Hadoop'
 

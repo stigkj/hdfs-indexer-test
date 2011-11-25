@@ -2,61 +2,26 @@
 
 # OUTPUT: SF, USE_INDEX, RUN, JAVA_MAX, TIME
 
-PERF_SUMMARY="build/perf_summary.csv"
 NUMBER_OF_RUNS=4
-JAVA_MAX=512
-USE_INDEX=true
-SAMPLE_FILE_HDFS="/test/lineitem.tbl"
-export SF=1
 
-#JAVA_MAX=(256 512 1024)
-#JAVA_INIT=(256 512 1024)
+. scripts/configure.sh
 
+if [ "$RESULT_FILE" == "" ]; then
+	echo "RESULT_FILE must be set" 1>&2
+	exit -1
+fi
 
+# setup
+rm "$RESULT_FILE"
+scripts/setup.sh
 
-setup(){
-    echo "removing lineitem.tbl from build/ and hdfs" 1>&2
-	rm build/lineitem.tbl
-	hadoop fs -rm "/test/lineitem.tbl"
-	scripts/setupHdfs.sh
-}
+# without index
+export USE_INDEX=false
+scripts/baseHadoopRun.sh
 
-run(){
-	JAR=`ls build/libs/*.jar -1t|head -n 1`
-
-    echo "running job:" 1>&2
-    echo "hadoop jar ${JAR} de.rwhq.hdfs.index.test.Main "${SAMPLE_FILE_HDFS}" ${USE_INDEX} -Dmapred.child.java.opts=-Xmx${JAVA_MAX}M" 1>&2
-
-	START=$(date +%s)
-	hadoop jar ${JAR} de.rwhq.hdfs.index.test.Main "${SAMPLE_FILE_HDFS}" ${USE_INDEX} -Dmapred.child.java.opts=-Xmx${JAVA_MAX}M
-	END=$(date +%s)
-	DIFF=$(( $END - $START ))
-	echo "${SF},${USE_INDEX},${i},${JAVA_MAX},${DIFF}" >> $PERF_SUMMARY
-}
-
-setup
 # with index
+export USE_INDEX=true
 for (( i=1; i <= NUMBER_OF_RUNS; i++ ));do
-	run
+	scripts/baseHadoopRun.sh
 done
-
-USE_INDEX=false
-run
-
-exit
-
-
-for i in {1..5}; do
-	sleep 5
-	scripts/setupHdfs.sh
-	START=$(date +%s)
-	hadoop jar build/libs/hdfs-indexer-0.01.jar de.rwhq.hdfs.index.test.PerformanceMain "${SAMPLE_FILE_HDFS}" true -Dmapred.child.java.opts=-Xmx1024M
-	END=$(date +%s)
-	DIFF_INDEX=$(( $END - $START ))
-	echo "LARGE,true,${i},${DIFF_INDEX}" >> $PERF_SUMMARY
-
-	DIFF=$(( $DIFF_INDEX - $DIFF_NO_INDEX ))
-	echo "INDEX was ${DIFF} seconds faster"
-done
-
 
