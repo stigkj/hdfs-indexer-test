@@ -13,11 +13,6 @@ if [ "$RESULT_FILE" == "" ]; then
 	exit -1
 fi
 
-# make sure we are in the right directory for the relative paths in the rest of the script to work
-if [ ! -f build.gradle ];then
-	echo "please start the script from the root directory of the project" 1>&2
-	exit -1
-fi
 
 # remove local file if it already exists
 if [ -f $LOCAL_FILE ]; then
@@ -32,8 +27,7 @@ if [ $? -ne 0 ];then
 fi
 
 
-echo "removing csv_output and samplefile from hadoop" 1>&2
-hadoop fs -rmr /csv_output
+echo "removing samplefile from hadoop" 1>&2
 hadoop fs -rmr $HDFS_FILE
 hadoop fs -put "$LOCAL_FILE" "$HDFS_FILE"
 

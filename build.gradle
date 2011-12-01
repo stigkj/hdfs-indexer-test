@@ -43,22 +43,8 @@ sourceSets {
 
 //************* OWN TASKS ********************
 
-task tpch << {
-    run("scripts/tpch.sh")
-}
-tpch.description = 'Downloads and installs tpch on linux x86.'
-
-
 task runJar(dependsOn: jar) << {
-    run("scripts/runJar.sh")
-}
-
-task comparePerformance(dependsOn: jar) << {
-    run("scripts/comparePerformance.sh")
-}
-
-task setupHdfs << {
-    run("scripts/setup.sh")
+    run("scripts/run.sh")
 }
 runJar.description = 'trys to run the jar in Hadoop'
 

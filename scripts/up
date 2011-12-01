@@ -41,5 +41,8 @@ sudo gem install chef --no-ri --no-rdoc
 sudo mkdir /var/chef-solo
 sudo chef-solo -c chef/solo.rb -j chef/node.json
 
-echo "INSTALATION FINISHED. Please relogin"
-read
+echo "INSTALATION COMPLETE!"
+
+# reload the complete environment without having to log in again
+# source bashrc and profile did not work here
+sudo su - $USER

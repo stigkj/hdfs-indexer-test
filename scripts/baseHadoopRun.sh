@@ -32,7 +32,6 @@ fi
 
 hadoop fs -rmr /csv_output
 
-
 START=$(date +%s)
 hadoop jar ${JAR} de.rwhq.hdfs.index.test.Main "${HDFS_FILE}" ${USE_INDEX} -Dmapred.child.java.opts="-Xmx${JAVA_MAX}m -Xms${JAVA_MIN}m"
 END=$(date +%s)
