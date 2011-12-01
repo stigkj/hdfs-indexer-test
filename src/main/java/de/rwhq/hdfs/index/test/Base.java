@@ -98,8 +98,8 @@ public abstract class Base extends Configured implements Tool {
 		return job.waitForCompletion(true) ? 0 : 1;
 	}
 
-	protected abstract Class<TextInputFormat> getInputFormatClass();
-	protected abstract Class<CustomBuilder> getBuilderClass();
+	protected abstract Class<? extends InputFormat> getInputFormatClass();
+	protected abstract Class<? extends BaseBuilder> getBuilderClass();
 
 	@Override
 	public int run(String[] args) throws Exception {

@@ -74,7 +74,7 @@ public class Main extends Configured implements Tool {
 
 		// configuration for indexing
 		Configuration conf = getConf();
-		conf.setClass("indexBuilder", CustomBuilder.class, IndexBuilder.class);
+		conf.setClass("indexBuilder", BaseBuilder.class, IndexBuilder.class);
 		
 		setConf(conf);
 

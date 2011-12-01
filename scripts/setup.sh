@@ -29,6 +29,6 @@ fi
 
 echo "removing samplefile from hadoop" 1>&2
 hadoop fs -rmr $HDFS_FILE
-hadoop fs -put "$LOCAL_FILE" "$HDFS_FILE"
+hadoop fs -moveFromLocal "$LOCAL_FILE" "$HDFS_FILE"
 
 # exit 0 # put fails if $HDFS_FILE does already exist
