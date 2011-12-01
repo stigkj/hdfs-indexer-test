@@ -30,6 +30,11 @@ if [ "$CLASS" == "" ]; then
 	exit -1
 fi
 
+if [ "$RUN_COUNT" == "" ]; then
+    export RUN_COUNT=1;
+else
+    RUN_COUNT=$(($RUN_COUNT+1))
+fi
 
 hadoop fs -rmr /csv_output
 
@@ -37,4 +42,4 @@ START=$(date +%s)
 hadoop jar ${JAR} ${CLASS} "${HDFS_FILE}" -Dmapred.child.java.opts="-Xmx${JAVA_MAX}m -Xms${JAVA_MIN}m"
 END=$(date +%s)
 DIFF=$(( $END - $START ))
-echo "${CLASS},${SF},$JAVA_MIN,${JAVA_MAX},${DIFF}" >> "$RESULT_FILE"
+echo "${DIFF},${RUN_COUNT},${CLASS},${SF},$JAVA_MIN,${JAVA_MAX}" >> "$RESULT_FILE"

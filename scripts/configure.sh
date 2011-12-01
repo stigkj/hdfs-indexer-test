@@ -1,5 +1,5 @@
 
-#result file looks like this: SF, USE_INDEX, RUN, JAVA_MAX, TIME
+#result file looks like this: TIME, RUN, CLASS, SF, JAVA_MAX
 
 export CLASS="de.rwhq.hdfs.index.test.WithoutIndex"
 export RUNS=1
@@ -7,7 +7,7 @@ export JAVA_MIN=1024
 export JAVA_MAX=1024
 export HDFS_FILE="/test/lineitem.tbl"
 export SF=1
-export RESULT_FILE="build/result.csv"
+cexport RESULT_FILE="build/result.csv"
 export RESULT_APPEND=false
 export BUILD_TPCH=true
 
