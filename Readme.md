@@ -1,5 +1,6 @@
 # Prerequisites
 
+* Chef >= 0.8.10
 * vagrant ruby gem
 * [VirtualBox][vb-dl]
 

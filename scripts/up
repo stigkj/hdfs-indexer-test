@@ -1,0 +1,38 @@
+#!/bin/bash
+
+# this script can be called with
+#
+#   bash -c "`wget -O - .../up`"
+#
+# to install everything needed for the hdfs-indexer-test
+#
+# tested with Ubuntu 10.04
+
+echo "Please ensure your client ServerAliveInterval is set to <= 30.
+If ServerAliveInterval is too high, your connection might be resetted."
+read
+
+# install some required core packages
+sudo aptitude install -y ruby ruby-dev libopenssl-ruby rdoc ri irb build-essential wget ssl-cert curl git-core
+
+# install rubygems
+cd /tmp
+curl -O http://production.cf.rubygems.org/rubygems/rubygems-1.8.10.tgz
+tar zxf rubygems-1.8.10.tgz
+cd rubygems-1.8.10
+sudo ruby setup.rb --no-format-executable
+sudo gem update --system
+
+# install chef
+sudo gem install chef --no-ri --no-rdoc
+
+# clone the hdfs-indexer-test repository
+sudo git clone git://github.com/rweng/hdfs-indexer-test.git /indexer
+sudo chown -R ubuntu:ubuntu /indexer
+cd /indexer
+git submodule init
+git submodule update
+
+# start installation of chef recipes
+sudo mkdir /var/chef-solo
+sudo chef-solo -c chef/solo.rb -j chef/node.json
