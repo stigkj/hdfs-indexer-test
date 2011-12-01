@@ -10,11 +10,6 @@ if [ "$HDFS_FILE" == "" ]; then
 	exit -1
 fi
 
-if [ "$USE_INDEX" == "" ]; then
-	echo "USE_INDEX must be set" 1>&2
-	exit -1
-fi
-
 if [ "$JAVA_MAX" == "" ]; then
 	echo "JAVA_MAX must be set" 1>&2
 	exit -1
@@ -33,7 +28,7 @@ fi
 hadoop fs -rmr /csv_output
 
 START=$(date +%s)
-hadoop jar ${JAR} de.rwhq.hdfs.index.test.Main "${HDFS_FILE}" ${USE_INDEX} -Dmapred.child.java.opts="-Xmx${JAVA_MAX}m -Xms${JAVA_MIN}m"
+hadoop jar ${JAR} de.rwhq.hdfs.index.test.Main "${HDFS_FILE}" -Dmapred.child.java.opts="-Xmx${JAVA_MAX}m -Xms${JAVA_MIN}m"
 END=$(date +%s)
 DIFF=$(( $END - $START ))
 echo "${SF},${USE_INDEX},$JAVA_MIN,${JAVA_MAX},${DIFF}" >> "$RESULT_FILE"
