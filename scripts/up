@@ -9,13 +9,15 @@
 # tested with Ubuntu 10.04
 
 echo "Please ensure your client ServerAliveInterval is set to <= 30.
-If ServerAliveInterval is too high, your connection might be resetted."
+If ServerAliveInterval is too high, your connection might be resetted.
 
-echo "Press ENTER to continue"
+Also ensure that your kernel is up to date. Having an outdated kernel is known to cause issues.
+
+Press ENTER to continue"
 read
 
 # install some required core packages
-sudo aptitude install -y ruby ruby-dev ruby1.8 ruby1.8-dev libopenssl-ruby rdoc ri irb build-essential wget ssl-cert curl git-core
+sudo aptitude install -y ruby ruby-dev libopenssl-ruby rdoc ri irb build-essential wget ssl-cert curl git-core
 
 # install rubygems
 cd /tmp
@@ -38,3 +40,6 @@ sudo gem install chef --no-ri --no-rdoc
 # start installation of chef recipes
 sudo mkdir /var/chef-solo
 sudo chef-solo -c chef/solo.rb -j chef/node.json
+
+echo "INSTALATION FINISHED. Please relogin"
+read
