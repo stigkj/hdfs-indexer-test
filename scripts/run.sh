@@ -24,12 +24,12 @@ if [ "$BUILD_TPCH" == "" ]; then
 	exit -1
 fi
 
-if ! RESULT_APPEND; then
+if !$RESULT_APPEND; then
     rm "$RESULT_FILE"
 fi
 
 # setup
-if BUILD_TPCH; then
+if $BUILD_TPCH; then
     scripts/setup.sh
 fi
 
