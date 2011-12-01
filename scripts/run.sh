@@ -24,7 +24,7 @@ if [ "$BUILD_TPCH" == "" ]; then
 	exit -1
 fi
 
-if !$RESULT_APPEND; then
+if ! $RESULT_APPEND; then
     rm "$RESULT_FILE"
 fi
 
