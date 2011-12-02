@@ -79,7 +79,7 @@ public abstract class Base extends Configured implements Tool {
 			LOG.info("" + next.getKey() + " - " + next.getValue());
 		}
 
-		conf.set("mapred.map.child.java.opts", "-Xmx3000m -Xms3000m");
+		// conf.set("mapred.map.child.java.opts", "-Xmx3000m -Xms3000m");
 
 		conf.setClass("indexBuilder", getBuilderClass(), IndexBuilder.class);
 
