@@ -78,7 +78,7 @@ public abstract class Base extends Configured implements Tool {
 		setConf(conf);
 
 		Job job = new Job(conf, name);
-		job.setJarByClass(Main.class);
+		job.setJarByClass(Base.class);
 
 		job.setMapOutputKeyClass(Text.class);
 		job.setMapOutputValueClass(IntWritable.class);
@@ -108,10 +108,5 @@ public abstract class Base extends Configured implements Tool {
 		LOG.info("running job with hdfs file: " + hdfsFile);
 		return runJob("CSV", Map.class, Reduce.class, hdfsFile, "/csv_output");
 
-	}
-
-	public static void main(String[] args) throws Exception {
-		int ret = ToolRunner.run(new Main(), args);
-		System.exit(ret);
 	}
 }
