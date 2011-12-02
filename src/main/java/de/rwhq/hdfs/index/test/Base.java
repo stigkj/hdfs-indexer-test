@@ -20,6 +20,8 @@ import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 
 import java.io.IOException;
+import java.util.Iterator;
+import java.util.Map;
 
 public abstract class Base extends Configured implements Tool {
 	private static final Log LOG      = LogFactory.getLog(Base.class);
@@ -71,6 +73,11 @@ public abstract class Base extends Configured implements Tool {
 
 		// configuration for indexing
 		Configuration conf = getConf();
+		Iterator<java.util.Map.Entry<String,String>> iterator = conf.iterator();
+		while(iterator.hasNext()){
+			java.util.Map.Entry<String, String> next = iterator.next();
+			LOG.info("" + next.getKey() + " - " + next.getValue());
+		}
 
 
 		conf.setClass("indexBuilder", getBuilderClass(), IndexBuilder.class);
