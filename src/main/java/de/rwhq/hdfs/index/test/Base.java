@@ -74,12 +74,14 @@ public abstract class Base extends Configured implements Tool {
 		// configuration for indexing
 		Configuration conf = getConf();
 		Iterator<java.util.Map.Entry<String,String>> iterator = conf.iterator();
+
+		// conf.set("mapred.map.child.java.opts", "-Xmx3000m -Xms3000m");
+		
 		while(iterator.hasNext()){
 			java.util.Map.Entry<String, String> next = iterator.next();
 			LOG.info("" + next.getKey() + " - " + next.getValue());
 		}
 
-		// conf.set("mapred.map.child.java.opts", "-Xmx3000m -Xms3000m");
 
 		conf.setClass("indexBuilder", getBuilderClass(), IndexBuilder.class);
 

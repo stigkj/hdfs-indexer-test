@@ -39,7 +39,7 @@ fi
 hadoop fs -rmr /csv_output
 
 START=$(date +%s)
-hadoop jar ${JAR} ${CLASS} "${HDFS_FILE}" -Dmapred.child.java.opts="-Xmx${JAVA_MAX}m -Xms${JAVA_MIN}m"
+hadoop jar ${JAR} ${CLASS} "-Dmapred.child.java.opts=-Xmx${JAVA_MAX}m -Xms${JAVA_MIN}m" "${HDFS_FILE}"
 END=$(date +%s)
 DIFF=$(( $END - $START ))
 echo "${DIFF},${RUN_COUNT},${CLASS},${SF},$JAVA_MIN,${JAVA_MAX}" >> "$RESULT_FILE"
