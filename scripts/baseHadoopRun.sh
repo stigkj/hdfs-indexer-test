@@ -43,3 +43,5 @@ hadoop jar ${JAR} ${CLASS} "-Dmapred.child.java.opts=-Xmx${JAVA_MAX}m -Xms${JAVA
 END=$(date +%s)
 DIFF=$(( $END - $START ))
 echo "${DIFF},${RUN_COUNT},${CLASS},${SF},$JAVA_MIN,${JAVA_MAX}" >> "$RESULT_FILE"
+
+hadoop -cat /csv
