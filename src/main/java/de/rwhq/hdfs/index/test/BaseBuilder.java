@@ -12,10 +12,10 @@ public abstract class BaseBuilder extends AbstractIndexBuilder {
 
 	@Override
 	public BTreeIndexBuilder configure(BTreeIndexBuilder bTreeIndexBuilder) {
-		new File("/mnt/index").mkdir();
-		
+		String indexDir = "/indexer/data";
+
 		return configure2(bTreeIndexBuilder
-				.indexFolder("/mnt/index")
+				.indexFolder(indexDir)
 				.addDefaultRange(new Range(0, 10))
 				.cacheSize(25 * 1000)
 				.primaryIndex()
