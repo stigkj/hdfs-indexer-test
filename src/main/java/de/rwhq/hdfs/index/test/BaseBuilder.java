@@ -11,18 +11,18 @@ import java.io.Serializable;
 public abstract class BaseBuilder extends AbstractIndexBuilder {
 
 	@Override
-	public BTreeIndexBuilder configure(BTreeIndexBuilder bTreeIndexBuilder) {
+	public MFIBuilder configure(MFIBuilder bTreeIndexBuilder) {
 		String indexDir = "/indexer/data";
 
 		return configure2(bTreeIndexBuilder
 				.indexFolder(indexDir)
 				.addDefaultRange(new Range(0, 10))
 				.cacheSize(25 * 1000)
-				.primaryIndex()
+				.treePageSize(128 * 1024 * 1024)
 				.keySerializer(IntegerSerializer.INSTANCE)
 				.keyExtractor(new IntegerCSVExtractor(0, "\\|"))
 				.comparator(IntegerComparator.INSTANCE));
 	}
 
-	protected abstract BTreeIndexBuilder configure2(BTreeIndexBuilder b);
+	protected abstract MFIBuilder configure2(MFIBuilder b);
 }

@@ -1,7 +1,7 @@
 package de.rwhq.hdfs.index.test;
 
-import de.rwhq.hdfs.index.BTreeIndexBuilder;
 import de.rwhq.hdfs.index.IndexedInputFormat;
+import de.rwhq.hdfs.index.MFIBuilder;
 import org.apache.hadoop.mapreduce.InputFormat;
 import org.apache.hadoop.util.ToolRunner;
 
@@ -19,7 +19,7 @@ public class SecondaryIndex1 extends Base {
 	public static class Builder extends BaseBuilder {
 
 		@Override
-		protected BTreeIndexBuilder configure2(BTreeIndexBuilder b) {
+		protected MFIBuilder configure2(MFIBuilder b) {
 			// long is 8
 			return b.secondaryIndex().cacheSize(1024 * 1024 * 1024 / 4); // 2GB
 		}
