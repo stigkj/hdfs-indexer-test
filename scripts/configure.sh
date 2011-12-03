@@ -13,4 +13,4 @@ export BUILD_TPCH=true
 
 # just use the first jar you find in there (should be the right one)
 export JAR=`ls build/libs/*.jar -1t|head -n 1`
-
+export RUN_COUNT=1
