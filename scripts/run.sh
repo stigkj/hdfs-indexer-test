@@ -24,6 +24,12 @@ if [ "$BUILD_TPCH" == "" ]; then
 	exit -1
 fi
 
+if [ "$RUNS" == "" ]; then
+    echo "RUNS must be set" 1>&2
+	exit -1
+fi
+
+
 if ! $RESULT_APPEND; then
     rm "$RESULT_FILE"
 fi
@@ -33,7 +39,7 @@ if $BUILD_TPCH; then
     scripts/setup.sh
 fi
 
-for (( i=1; i <= RUNS; i++ ));do
+for (( export RUNS_COUNT=1; i <= RUNS; RUNS_COUNT++ ));do
 	scripts/baseHadoopRun.sh
 done
 
