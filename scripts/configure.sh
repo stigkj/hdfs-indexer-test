@@ -1,10 +1,10 @@
 
 #result file looks like this: TIME, RUN, CLASS, SF, JAVA_MAX
 
-export CLASS="de.rwhq.hdfs.index.test.WithoutIndex"
+export CLASS="de.rwhq.hdfs.index.test.PrimaryIndex1"
 export RUNS=1
 export JAVA_MIN=1024
-export JAVA_MAX=1024
+export JAVA_MAX=5120
 export HDFS_FILE="/test/lineitem.tbl"
 export SF=1
 export RESULT_FILE="build/result.csv"
