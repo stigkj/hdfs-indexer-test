@@ -3,6 +3,7 @@ package de.rwhq.hdfs.index.test;
 import de.rwhq.hdfs.index.BTreeIndexBuilder;
 import de.rwhq.hdfs.index.IndexedInputFormat;
 import org.apache.hadoop.mapreduce.InputFormat;
+import org.apache.hadoop.util.ToolRunner;
 
 public class SecondaryIndex1 extends Base {
 	@Override
@@ -22,5 +23,10 @@ public class SecondaryIndex1 extends Base {
 			// long is 8
 			return b.secondaryIndex().cacheSize(1024 * 1024 * 1024 / 4); // 2GB
 		}
+	}
+
+	public static void main(String[] args) throws Exception {
+		int ret = ToolRunner.run(new SecondaryIndex1(), args);
+		System.exit(ret);
 	}
 }
