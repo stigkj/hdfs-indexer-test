@@ -32,8 +32,7 @@ fi
 
 if [ "$RUN_COUNT" == "" ]; then
     echo "RUN_COUNT must be set to one. It can't be defined in this script this changes would get lost when returning" 1>&2
-else
-    export RUN_COUNT=$(($RUN_COUNT+1))
+    exit -1
 fi
 
 hadoop fs -rmr /csv_output

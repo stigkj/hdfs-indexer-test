@@ -39,7 +39,8 @@ if $BUILD_TPCH; then
     scripts/setup.sh
 fi
 
-for (( export RUNS_COUNT=1; i <= RUNS; RUNS_COUNT++ ));do
+for (( i=1; i <= RUNS; i++ ));do
+    export RUN_COUNT=$i
 	scripts/baseHadoopRun.sh
 done
 
