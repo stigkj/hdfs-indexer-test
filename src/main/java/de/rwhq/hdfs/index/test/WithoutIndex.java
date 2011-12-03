@@ -1,6 +1,6 @@
 package de.rwhq.hdfs.index.test;
 
-import de.rwhq.hdfs.index.BTreeIndexBuilder;
+import de.rwhq.hdfs.index.MFIBuilder;
 import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
 import org.apache.hadoop.util.ToolRunner;
 
@@ -18,7 +18,7 @@ public class WithoutIndex extends Base {
 
 	public static class Builder extends BaseBuilder {
 		@Override
-		protected BTreeIndexBuilder configure2(BTreeIndexBuilder b) {
+		protected MFIBuilder configure2(MFIBuilder b) {
 			return b;
 		}
 	}
