@@ -2,7 +2,7 @@
 #result file looks like this: TIME, RUN, CLASS, SF, JAVA_MAX
 
 export CLASS="de.rwhq.hdfs.index.test.PrimaryIndex1"
-export RUNS=1
+export RUNS=2
 export JAVA_MIN=1024
 export JAVA_MAX=5120
 export HDFS_FILE="/test/lineitem.tbl"
