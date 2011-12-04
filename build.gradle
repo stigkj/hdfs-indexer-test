@@ -48,6 +48,10 @@ task runJar(dependsOn: jar) << {
 }
 runJar.description = 'trys to run the jar in Hadoop'
 
+task clearCache() << {
+    run("rm -rf " + System.getenv()["HOME"] + "/.gradle/cache/hdfs-indexer")
+}
+
 //************* HELPER METHODS ********************
 
 // run a command with direct process output

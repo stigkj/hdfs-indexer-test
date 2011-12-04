@@ -18,7 +18,7 @@ public abstract class BaseBuilder extends AbstractIndexBuilder {
 				.indexFolder(indexDir)
 				.addDefaultRange(new Range(0, 10))
 				.cacheSize(25 * 1000)
-				.treePageSize(128 * 1024 * 1024)
+				.treePageSize(128 * 1024)
 				.keySerializer(IntegerSerializer.INSTANCE)
 				.keyExtractor(new IntegerCSVExtractor(0, "\\|"))
 				.comparator(IntegerComparator.INSTANCE));

@@ -1,46 +1,12 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
-# make sure we are in the right directory for the relative paths in the rest of the script to work
-if [ ! -f build.gradle ];then
-	echo "please start the script from the root directory of the project" 1>&2
-	exit -1
-fi
+export CONFIGURATION;
 
-. scripts/configure.sh
+CONFIGURATION=scripts/conf/without.sh
+scripts/run.sh
 
-if [ "$RESULT_FILE" == "" ]; then
-	echo "RESULT_FILE must be set" 1>&2
-	exit -1
-fi
+CONFIGURATION=scripts/conf/secondary1-5.sh
+scripts/run.sh
 
-if [ "$RESULT_APPEND" == "" ]; then
-	echo "RESULT_APPEND must be set" 1>&2
-	exit -1
-fi
-
-
-if [ "$BUILD_TPCH" == "" ]; then
-    echo "BUILD_TPCH must be set" 1>&2
-	exit -1
-fi
-
-if [ "$RUNS" == "" ]; then
-    echo "RUNS must be set" 1>&2
-	exit -1
-fi
-
-
-if ! $RESULT_APPEND; then
-    rm "$RESULT_FILE"
-fi
-
-# setup
-if $BUILD_TPCH; then
-    scripts/setup.sh
-fi
-
-for (( i=1; i <= RUNS; i++ ));do
-    export RUN_COUNT=$i
-	scripts/baseHadoopRun.sh
-done
-
+CONFIGURATION=scripts/conf/primary1-5.sh
+scripts/run.sh
