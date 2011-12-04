@@ -3,10 +3,8 @@ package de.rwhq.hdfs.index.test;
 import de.rwhq.btree.Range;
 import de.rwhq.comparator.IntegerComparator;
 import de.rwhq.hdfs.index.*;
+import de.rwhq.hdfs.index.extractor.IntegerCSVExtractor;
 import de.rwhq.serializer.IntegerSerializer;
-
-import java.io.File;
-import java.io.Serializable;
 
 public abstract class BaseBuilder extends AbstractIndexBuilder {
 
