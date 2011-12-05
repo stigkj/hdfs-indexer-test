@@ -4,7 +4,7 @@ export CLASS="de.rwhq.hdfs.index.test.SecondaryIndexC2S0"
 export RUNS=2
 export RESULT_APPEND=true
 export BUILD_TPCH=true
-export SF=50 #9.6 GB # 80 mio entries
+export SF=50    # 400 = 80 mio entries = 9.6 GB
 
 export JAVA_MIN=1024
 export JAVA_MAX=5120
