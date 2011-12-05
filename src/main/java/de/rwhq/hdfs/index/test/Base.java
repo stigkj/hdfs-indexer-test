@@ -34,6 +34,7 @@ public abstract class Base extends Configured implements Tool {
 		@Override
 		public void map(LongWritable key, Text value, Context context)
 				throws IOException, InterruptedException {
+			/*
 			String oId = value.toString().split("\\|")[0];
 			int orderId;
 			try {
@@ -49,18 +50,20 @@ public abstract class Base extends Configured implements Tool {
 				word.set("" + orderId);
 				context.write(word, one);
 			}
+			*/
 		}
 	}
 
 	public static class Reduce extends org.apache.hadoop.mapreduce.Reducer<Text, IntWritable, Text, IntWritable> {
-
 		public void reduce(Text key, Iterable<IntWritable> values, Context context)
 				throws IOException, InterruptedException {
+			/*
 			int sum = 0;
 			for (IntWritable value : values)
 				sum++;
 
 			context.write(key, new IntWritable(sum));
+			*/
 		}
 	}
 

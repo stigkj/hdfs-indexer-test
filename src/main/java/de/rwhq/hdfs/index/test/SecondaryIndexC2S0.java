@@ -1,11 +1,12 @@
 package de.rwhq.hdfs.index.test;
 
+import com.google.common.collect.Lists;
 import de.rwhq.hdfs.index.IndexedInputFormat;
 import de.rwhq.hdfs.index.MFIBuilder;
 import org.apache.hadoop.mapreduce.InputFormat;
 import org.apache.hadoop.util.ToolRunner;
 
-public class SecondaryIndex1 extends Base {
+public class SecondaryIndexC2S0 extends Base {
 	@Override
 	protected Class<? extends InputFormat> getInputFormatClass() {
 		return IndexedInputFormat.class;
@@ -20,13 +21,15 @@ public class SecondaryIndex1 extends Base {
 
 		@Override
 		protected MFIBuilder configure2(MFIBuilder b) {
-			// long is 8
-			return b.secondaryIndex().cacheSize(1024 * 1024 * 1024 / 4); // 2GB
+			// long is 8 byte
+			return b.secondaryIndex()
+					.defaultSearchRanges(Lists.newArrayList())
+					.cacheSize(1024 * 1024 * 1024 / 4); // 2GB
 		}
 	}
 
 	public static void main(String[] args) throws Exception {
-		int ret = ToolRunner.run(new SecondaryIndex1(), args);
+		int ret = ToolRunner.run(new SecondaryIndexC2S0(), args);
 		System.exit(ret);
 	}
 }

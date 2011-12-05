@@ -14,7 +14,6 @@ public abstract class BaseBuilder extends AbstractIndexBuilder {
 
 		return configure2(bTreeIndexBuilder
 				.indexFolder(indexDir)
-				.addDefaultRange(new Range(0, 10))
 				.cacheSize(25 * 1000)
 				.treePageSize(128 * 1024)
 				.keySerializer(IntegerSerializer.INSTANCE)

@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
 if [ "${SF}" == "" ];then
-	SF=0.1
+	echo "SF must be set" 1>&2
+	exit -1
 fi
 
 
@@ -12,20 +13,6 @@ fi
 
 mkdir -p build
 cd build
-echo "dbgen: dbgen -T L -s ${SF}" 1>&2
-dbgen -T L -s ${SF}
+echo "dbgen: dbgen -T P -s ${SF}" 1>&2
+dbgen -T P -s ${SF}
 echo "dbgen done" 1>&2
-exit
-
-echo "should never appear, after exit in tpch.sh" 1>&2
-# not used anymore since we use the tpch cookbook
-curl "http://www.tpc.org/tpch/spec/tpch_2_14_0.tgz" -o "build/tpch_2_14_0.tgz"
-cd build
-tar xzf tpch*.tgz
-rm dbgen/makefile.suite
-cp ../cookbooks/tpch/templates/default/makefile.suite dbgen/
-cd dbgen
-make -f makefile.suite
-echo "generating: dbgen -T L -s 1 -v" 1>&2
-./dbgen -T L -s 1 -v
-mv lineitem.tbl ../
