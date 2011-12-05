@@ -2,5 +2,5 @@
 
 export CONFIGURATION;
 
-CONFIGURATION=scripts/conf/secondary1-5.sh
+CONFIGURATION=scripts/conf/secondary.sh
 scripts/runConfiguration.sh

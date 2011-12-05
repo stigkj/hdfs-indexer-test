@@ -1,7 +1,7 @@
 
 #result file looks like this: TIME, RUN, CLASS, SF, JAVA_MAX
 
-export CLASS="de.rwhq.hdfs.index.test.SecondaryIndex1"
+export CLASS="de.rwhq.hdfs.index.test.SecondaryIndexC2S25"
 export RUNS=10
 export JAVA_MIN=1024
 export JAVA_MAX=5120
