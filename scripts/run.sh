@@ -6,7 +6,7 @@ if [ ! -f build.gradle ];then
 	exit -1
 fi
 
-$CONFIGURATION="scripts/conf.sh"
+CONFIGURATION="scripts/conf.sh"
 
 if [ ! -f $CONFIGURATION ]; then
 	echo "CONFIGURATION file must exist" 1>&2
