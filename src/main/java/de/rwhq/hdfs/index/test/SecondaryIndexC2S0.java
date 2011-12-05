@@ -1,6 +1,7 @@
 package de.rwhq.hdfs.index.test;
 
 import com.google.common.collect.Lists;
+import de.rwhq.btree.Range;
 import de.rwhq.hdfs.index.IndexedInputFormat;
 import de.rwhq.hdfs.index.MFIBuilder;
 import org.apache.hadoop.mapreduce.InputFormat;
@@ -23,8 +24,8 @@ public class SecondaryIndexC2S0 extends Base {
 		protected MFIBuilder configure2(MFIBuilder b) {
 			// long is 8 byte
 			return b.secondaryIndex()
-					.defaultSearchRanges(Lists.newArrayList())
-					.cacheSize(1024 * 1024 * 1024 / 4); // 2GB
+					.defaultSearchRanges(Lists.newArrayList(new Range(-1, -1)))
+					.cacheSize(1024 * 1024 * 1024 / 4); // 2GB (3 total, with values)
 		}
 	}
 

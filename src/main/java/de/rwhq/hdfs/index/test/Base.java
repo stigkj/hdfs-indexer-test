@@ -35,6 +35,7 @@ public abstract class Base extends Configured implements Tool {
 		public void map(LongWritable key, Text value, Context context)
 				throws IOException, InterruptedException {
 			word.set(value);
+			
 			/*
 			String oId = value.toString().split("\\|")[0];
 			int orderId;
