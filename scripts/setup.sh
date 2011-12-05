@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-export LOCAL_FILE="build/lineitem.tbl"
-
 if [ "$HDFS_FILE" == "" ]; then
 	echo "HDFS_FILE must be set" 1>&2
 	exit -1
