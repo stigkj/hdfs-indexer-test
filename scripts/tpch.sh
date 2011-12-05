@@ -13,6 +13,6 @@ fi
 
 mkdir -p build
 cd build
-echo "dbgen: dbgen -T P -s ${SF}" 1>&2
-dbgen -T P -s ${SF}
+echo "dbgen: dbgen -T P -s ${SF} -f" 1>&2
+dbgen -T P -s ${SF} -f
 echo "dbgen done" 1>&2
