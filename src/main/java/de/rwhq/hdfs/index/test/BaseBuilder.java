@@ -1,6 +1,5 @@
 package de.rwhq.hdfs.index.test;
 
-import de.rwhq.btree.Range;
 import de.rwhq.comparator.IntegerComparator;
 import de.rwhq.hdfs.index.*;
 import de.rwhq.hdfs.index.extractor.IntegerCSVExtractor;
@@ -14,7 +13,6 @@ public abstract class BaseBuilder extends AbstractIndexBuilder {
 
 		return configure2(bTreeIndexBuilder
 				.indexFolder(indexDir)
-				.cacheSize(25 * 1000)
 				.treePageSize(128 * 1024)
 				.keySerializer(IntegerSerializer.INSTANCE)
 				.keyExtractor(new IntegerCSVExtractor(0, "\\|"))

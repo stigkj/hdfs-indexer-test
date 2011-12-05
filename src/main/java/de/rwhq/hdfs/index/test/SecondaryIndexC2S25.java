@@ -25,7 +25,7 @@ public class SecondaryIndexC2S25 extends Base {
 			// long is 8 byte
 			return b.secondaryIndex()
 					.defaultSearchRanges(Lists.newArrayList(new Range(null, 20 * 1000 * 1000)))
-					.cacheSize(1024 * 1024 * 1024 / 4); // 2GB
+					.cacheSize(1024 * 1024 * 1024 / 4); // 2GB // keyvalue entries
 		}
 	}
 
