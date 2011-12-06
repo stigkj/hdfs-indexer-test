@@ -7,17 +7,19 @@ import de.rwhq.serializer.IntegerSerializer;
 
 public abstract class BaseBuilder extends AbstractIndexBuilder {
 
+
 	@Override
-	public MFIBuilder configure(MFIBuilder bTreeIndexBuilder) {
+	public IndexBuilder configure(IndexBuilder indexBuilder) {
 		String indexDir = "/indexer/data";
 
-		return configure2(bTreeIndexBuilder
+		return configure2(indexBuilder
 				.indexFolder(indexDir)
 				.treePageSize(128 * 1024)
 				.keySerializer(IntegerSerializer.INSTANCE)
 				.keyExtractor(new IntegerCSVExtractor(0, "\\|"))
 				.comparator(IntegerComparator.INSTANCE));
+
 	}
 
-	protected abstract MFIBuilder configure2(MFIBuilder b);
+	protected abstract IndexBuilder configure2(IndexBuilder b);
 }

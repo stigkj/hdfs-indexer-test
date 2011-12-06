@@ -1,10 +1,10 @@
 #result file looks like this: TIME, RUN, CLASS, SF, JAVA_MAX
 
-export CLASS="de.rwhq.hdfs.index.test.SecondaryIndexC2S0"
+export CLASS="de.rwhq.hdfs.index.test.WithoutIndex"
 export RUNS=10
 export RESULT_APPEND=true
 export BUILD_TPCH=true
-export SF=50    # 400 = 80 mio entries = 9.6 GB
+export SF=400    # 400 = 80 mio entries = 9.6 GB
 
 export JAVA_MIN=1024
 export JAVA_MAX=5120

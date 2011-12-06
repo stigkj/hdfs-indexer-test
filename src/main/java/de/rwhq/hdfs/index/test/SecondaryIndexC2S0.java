@@ -2,8 +2,8 @@ package de.rwhq.hdfs.index.test;
 
 import com.google.common.collect.Lists;
 import de.rwhq.btree.Range;
+import de.rwhq.hdfs.index.IndexBuilder;
 import de.rwhq.hdfs.index.IndexedInputFormat;
-import de.rwhq.hdfs.index.MFIBuilder;
 import org.apache.hadoop.mapreduce.InputFormat;
 import org.apache.hadoop.util.ToolRunner;
 
@@ -21,7 +21,7 @@ public class SecondaryIndexC2S0 extends Base {
 	public static class Builder extends BaseBuilder {
 
 		@Override
-		protected MFIBuilder configure2(MFIBuilder b) {
+		protected IndexBuilder configure2(IndexBuilder b) {
 			// long is 8 byte
 			return b.secondaryIndex()
 					.defaultSearchRanges(Lists.newArrayList(new Range(-1, -1)))

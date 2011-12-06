@@ -1,7 +1,7 @@
 package de.rwhq.hdfs.index.test;
 
+import de.rwhq.hdfs.index.IndexBuilder;
 import de.rwhq.hdfs.index.IndexedInputFormat;
-import de.rwhq.hdfs.index.MFIBuilder;
 import de.rwhq.serializer.StringCutSerializer;
 import org.apache.hadoop.mapreduce.InputFormat;
 import org.apache.hadoop.util.ToolRunner;
@@ -20,7 +20,7 @@ public class PrimaryIndex1 extends Base {
 	public static class Builder extends BaseBuilder{
 
 		@Override
-		protected MFIBuilder configure2(MFIBuilder b) {
+		protected IndexBuilder configure2(IndexBuilder b) {
 			// line = 100 Bytes
 			return b.primaryIndex().cacheSize(10 *1000 * 1000).valueSerializer(StringCutSerializer.get(25)); // 10 mio entrys a 25 byte
 		}
