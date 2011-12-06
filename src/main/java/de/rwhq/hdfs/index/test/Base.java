@@ -75,7 +75,9 @@ public abstract class Base extends Configured implements Tool {
 		Configuration conf = getConf();
 		
 		conf.setClass("indexBuilder", getBuilderClass(), IndexBuilder.class);
+
 		LOG.info("min split size: " + conf.get("mapred.min.split.size"));
+		LOG.info("mapper jvm opts: " + conf.get("mapred.child.java.opts"));
 
 		setConf(conf);
 
