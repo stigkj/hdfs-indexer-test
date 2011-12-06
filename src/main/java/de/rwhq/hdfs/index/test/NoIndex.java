@@ -4,6 +4,7 @@ import de.rwhq.hdfs.index.AbstractIndexBuilder;
 import de.rwhq.hdfs.index.IndexedInputFormat;
 import de.rwhq.hdfs.index.MFIBuilder;
 import org.apache.hadoop.mapreduce.InputFormat;
+import org.apache.hadoop.util.ToolRunner;
 
 public class NoIndex extends Base {
 	@Override
@@ -23,4 +24,10 @@ public class NoIndex extends Base {
 			return b.noIndex();
 		}
 	}
+
+	public static void main(String[] args) throws Exception {
+	int ret = ToolRunner.run(new NoIndex(), args);
+		System.exit(ret);
+	}
+
 }
