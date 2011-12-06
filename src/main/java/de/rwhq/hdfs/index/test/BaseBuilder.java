@@ -10,7 +10,7 @@ public abstract class BaseBuilder extends AbstractIndexBuilder {
 
 	@Override
 	public IndexBuilder configure(IndexBuilder indexBuilder) {
-		String indexDir = "/indexer/data";
+				String indexDir = "/indexer/data";
 
 		return configure2(indexBuilder
 				.indexFolder(indexDir)

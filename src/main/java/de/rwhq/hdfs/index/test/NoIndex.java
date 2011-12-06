@@ -1,14 +1,14 @@
 package de.rwhq.hdfs.index.test;
 
 import de.rwhq.hdfs.index.IndexBuilder;
-import de.rwhq.hdfs.index.IndexedInputFormat;
-import org.apache.hadoop.mapreduce.InputFormat;
+import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
 import org.apache.hadoop.util.ToolRunner;
 
 public class NoIndex extends Base {
+
 	@Override
-	protected Class<? extends InputFormat> getInputFormatClass() {
-		return IndexedInputFormat.class;
+	protected Class<TextInputFormat> getInputFormatClass() {
+		return TextInputFormat.class;
 	}
 
 	@Override
@@ -17,16 +17,15 @@ public class NoIndex extends Base {
 	}
 
 	public static class Builder extends BaseBuilder {
-
 		@Override
 		protected IndexBuilder configure2(IndexBuilder b) {
-			return b.noIndex();
+			return b;
 		}
 	}
 
+
 	public static void main(String[] args) throws Exception {
-	int ret = ToolRunner.run(new NoIndex(), args);
+		int ret = ToolRunner.run(new NoIndex(), args);
 		System.exit(ret);
 	}
-
 }

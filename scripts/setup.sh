@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+if [ ! -f build.gradle ];then
+	echo "please start the script from the root directory of the project" 1>&2
+	exit -1
+fi
+
+
 if [ "$HDFS_FILE" == "" ]; then
 	echo "HDFS_FILE must be set" 1>&2
 	exit -1
@@ -17,16 +23,19 @@ if [ -f $LOCAL_FILE ]; then
 	rm $LOCAL_FILE
 fi
 
-# create the local file
-scripts/tpch.sh
-if [ $? -ne 0 ];then
-	echo "script/tpch.sh returned unsuccessful. Aborting." 1>&2
+if [ "${SF}" == "" ];then
+	echo "SF must be set" 1>&2
 	exit -1
 fi
 
 
+# create the local file with tpch
+mkdir -p build
+cd build
+echo "dbgen: dbgen -T P -s ${SF} -f" 1>&2
+dbgen -T P -s ${SF} -f
+echo "dbgen done" 1>&2
+
 echo "removing samplefile from hadoop" 1>&2
 hadoop fs -rmr $HDFS_FILE
 hadoop fs -moveFromLocal "$LOCAL_FILE" "$HDFS_FILE"
-
-# exit 0 # put fails if $HDFS_FILE does already exist

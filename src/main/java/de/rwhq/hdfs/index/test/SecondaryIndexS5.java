@@ -1,12 +1,12 @@
 package de.rwhq.hdfs.index.test;
 
+import de.rwhq.btree.Range;
 import de.rwhq.hdfs.index.IndexBuilder;
 import de.rwhq.hdfs.index.IndexedInputFormat;
-import de.rwhq.serializer.StringCutSerializer;
 import org.apache.hadoop.mapreduce.InputFormat;
 import org.apache.hadoop.util.ToolRunner;
 
-public class PrimaryIndex1 extends Base {
+public class SecondaryIndexS5 extends Base{
 	@Override
 	protected Class<? extends InputFormat> getInputFormatClass() {
 		return IndexedInputFormat.class;
@@ -21,14 +21,13 @@ public class PrimaryIndex1 extends Base {
 
 		@Override
 		protected IndexBuilder configure2(IndexBuilder b) {
-			// line = 100 Bytes
-			return b.primaryIndex().cacheSize(10 *1000 * 1000).valueSerializer(StringCutSerializer.get(25)); // 10 mio entrys a 25 byte
+			return b.secondaryIndex().cacheSize(20 * 1100 * 1000 ).addDefaultRange(new Range(1, 4 * 1000 * 1000));
 		}
 	}
 
 
 	public static void main(String[] args) throws Exception {
-		int ret = ToolRunner.run(new PrimaryIndex1(), args);
+		int ret = ToolRunner.run(new SecondaryIndexS5(), args);
 		System.exit(ret);
 	}
 }

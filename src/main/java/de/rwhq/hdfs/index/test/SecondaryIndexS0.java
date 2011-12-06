@@ -7,7 +7,7 @@ import de.rwhq.hdfs.index.IndexedInputFormat;
 import org.apache.hadoop.mapreduce.InputFormat;
 import org.apache.hadoop.util.ToolRunner;
 
-public class SecondaryIndexC2S0 extends Base {
+public class SecondaryIndexS0 extends Base {
 	@Override
 	protected Class<? extends InputFormat> getInputFormatClass() {
 		return IndexedInputFormat.class;
@@ -24,13 +24,13 @@ public class SecondaryIndexC2S0 extends Base {
 		protected IndexBuilder configure2(IndexBuilder b) {
 			// long is 8 byte
 			return b.secondaryIndex()
-					.defaultSearchRanges(Lists.newArrayList(new Range(-1, -1)))
-					.cacheSize(1024 * 1024 * 1024 / 4); // 2GB (3 total, with values)
+					.addDefaultRange(new Range(-1, -1))
+					.cacheSize(20 * 1000 * 1000 + 100 * 1000);
 		}
 	}
 
 	public static void main(String[] args) throws Exception {
-		int ret = ToolRunner.run(new SecondaryIndexC2S0(), args);
+		int ret = ToolRunner.run(new SecondaryIndexS0(), args);
 		System.exit(ret);
 	}
 }
