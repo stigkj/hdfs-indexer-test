@@ -34,9 +34,6 @@ public abstract class Base extends Configured implements Tool {
 		@Override
 		public void map(LongWritable key, Text value, Context context)
 				throws IOException, InterruptedException {
-			word.set(value);
-			
-			/*
 			String oId = value.toString().split("\\|")[0];
 			int orderId;
 			try {
@@ -46,13 +43,11 @@ public abstract class Base extends Configured implements Tool {
 				return;
 			}
 
-			LOG.info("got order id " + oId);
-
-			if (orderId < 10) {
-				word.set("" + orderId);
-				context.write(word, one);
+			// we have a comparision here so that it is more realistic.
+			if (orderId < 0) {
+				// do something
 			}
-			*/
+
 		}
 	}
 
