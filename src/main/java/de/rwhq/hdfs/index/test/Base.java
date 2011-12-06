@@ -34,20 +34,20 @@ public abstract class Base extends Configured implements Tool {
 		@Override
 		public void map(LongWritable key, Text value, Context context)
 				throws IOException, InterruptedException {
-			String oId = value.toString().split("\\|")[0];
-			int orderId;
+
+			int partId;
+
 			try {
-				orderId = Integer.parseInt(oId);
+				partId = Integer.parseInt(value.toString().split("\\|")[0]);
 			} catch (Exception e) {
-				LOG.warn("coundn't parse '" + oId + "', which is the fist part of line\n" + value, e);
+				LOG.warn("coundn't parse line:\n" + value, e);
 				return;
 			}
 
-			// we have a comparision here so that it is more realistic.
-			if (orderId < 0) {
+			// if no index is used, we check the search ragnes here manually
+			if (partId < 0) {
 				// do something
 			}
-
 		}
 	}
 
