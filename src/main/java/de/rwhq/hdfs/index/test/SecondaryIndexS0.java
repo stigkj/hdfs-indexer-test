@@ -24,6 +24,7 @@ public class SecondaryIndexS0 extends Base {
 		protected IndexBuilder configure2(IndexBuilder b) {
 			// long is 8 byte
 			return b.secondaryIndex()
+					.treePageSize(64 * 1024)
 					.addDefaultRange(new Range(-1, -1))
 					.cacheSize(20 * 1000 * 1000 + 100 * 1000);
 		}

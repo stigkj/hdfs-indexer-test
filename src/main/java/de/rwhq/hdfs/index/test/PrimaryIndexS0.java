@@ -24,6 +24,7 @@ public class PrimaryIndexS0 extends Base {
 		protected IndexBuilder configure2(IndexBuilder b) {
 			// line = 100 Bytes
 			return b.primaryIndex()
+					.treePageSize(128 * 1024)
 					.addDefaultRange(new Range(-1, -1))
 					.cacheSize(20 * 1000 * 1000 + 100 * 1000)
 					.valueSerializer(StringCutSerializer.get(122));
