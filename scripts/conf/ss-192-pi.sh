@@ -6,7 +6,7 @@ export SF=400    # 400 = 80 mio entries = 9.6 GB
 
 export JAVA_MIN=3072
 export JAVA_MAX=3072
-export JAR_OPTS="-Dmapred.min.split.size=201326592"
+export JAR_OPTS="-Dmapred.min.split.size=201326592 -Dmapred.max.split.size=201326592"
 export HDFS_FILE="/test/lineitem.tbl"
 export LOCAL_FILE="build/part.tbl"
 export RESULT_FILE="build/result.csv"
