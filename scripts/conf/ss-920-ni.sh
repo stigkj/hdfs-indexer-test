@@ -1,7 +1,4 @@
-echo This test does not work yet: Exception: Parent died
-exit -1
-
-export CLASS="de.rwhq.hdfs.index.test.PrimaryIndexS0"
+export CLASS="de.rwhq.hdfs.index.test.NoIndex"
 export RUNS=10
 export RESULT_APPEND=true
 export BUILD_TPCH=false
@@ -9,7 +6,7 @@ export SF=400    # 400 = 80 mio entries = 9.6 GB
 
 export JAVA_MIN=3072
 export JAVA_MAX=3072
-export JAR_OPTS="-Dmapred.min.split.size=2516582400 -Dmapred.max.split.size=2516582400"
+export JAR_OPTS="-Dmapred.min.split.size=964689920 -Dmapred.max.split.size=964689920"
 export HDFS_FILE="/test/lineitem.tbl"
 export LOCAL_FILE="build/part.tbl"
 export RESULT_FILE="build/result.csv"

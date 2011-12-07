@@ -37,5 +37,8 @@ dbgen -T P -s ${SF} -f
 echo "dbgen done" 1>&2
 
 echo "removing samplefile from hadoop" 1>&2
+echo hadoop fs -rmr $HDFS_FILE
 hadoop fs -rmr $HDFS_FILE
+
+echo hadoop fs -moveFromLocal "$LOCAL_FILE" "$HDFS_FILE"
 hadoop fs -moveFromLocal "$LOCAL_FILE" "$HDFS_FILE"
