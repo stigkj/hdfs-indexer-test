@@ -1,4 +1,3 @@
 
-
-export CONFIGURATION="scripts/conf.sh"
+export CONFIGURATION="FILL IN"
 scripts/runConf.sh
