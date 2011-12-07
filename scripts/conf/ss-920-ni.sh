@@ -1,5 +1,5 @@
 export CLASS="de.rwhq.hdfs.index.test.NoIndex"
-export RUNS=10
+export RUNS=3
 export RESULT_APPEND=true
 export BUILD_TPCH=false
 export SF=400    # 400 = 80 mio entries = 9.6 GB
