@@ -35,6 +35,7 @@ cd build
 echo "dbgen: dbgen -T P -s ${SF} -f" 1>&2
 dbgen -T P -s ${SF} -f
 echo "dbgen done" 1>&2
+cd ..
 
 echo "removing samplefile from hadoop" 1>&2
 echo hadoop fs -rmr $HDFS_FILE
