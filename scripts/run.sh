@@ -1,3 +1,3 @@
 
-export CONFIGURATION="script/conf.sh"
+export CONFIGURATION="scripts/conf.sh"
 scripts/runConf.sh
