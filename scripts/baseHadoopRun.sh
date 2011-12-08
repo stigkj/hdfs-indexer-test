@@ -39,7 +39,7 @@ hadoop fs -rmr /csv_output
 
 echo "running: " hadoop jar ${JAR} ${CLASS} "${JAR_OPTS}" -Dmapred.child.java.opts="-Xmx${JAVA_MAX}m -Xms${JAVA_MIN}m" "${HDFS_FILE}" 1>&2
 START=$(date +%s)
-hadoop jar ${JAR} ${CLASS} ${JAR_OPTS} -Dmapred.child.java.opts="-Xmx${JAVA_MAX}m -Xms${JAVA_MIN}m" "${HDFS_FILE}"
+hadoop jar ${JAR} ${CLASS} ${JAR_OPTS} -Dmapred.child.java.opts="-Xmx${JAVA_MAX}m -Xms${JAVA_MIN}m" -Dmapred.task.timeout=1800000 "${HDFS_FILE}"
 END=$(date +%s)
 DIFF=$(( $END - $START ))
 echo "${DIFF},${RUN_COUNT},${CLASS},${SF},${JAVA_MIN},${JAVA_MAX}" >> "$RESULT_FILE"
