@@ -1,13 +1,13 @@
 export CLASS="de.rwhq.hdfs.index.test.WithoutIndex"
 export RUNS=10
+export SF=400    # 400 = 80 mio entries = 9.6 GB
+export SPLIT_SIZE=184;
 export RESULT_APPEND=true
 export BUILD_TPCH=true
-export SF=400    # 400 = 80 mio entries = 9.6 GB
 
-export JAVA_MIN=1024
-export JAVA_MAX=5120
+export JAVA_MIN=$((3 * 1024 * 1024))
+export JAVA_MAX=$((3 * 1024 * 1024))
 
-export SPLIT_SIZE=184;
 export JAR_OPTS="-Dmapred.min.split.size=$(($SPLIT_SIZE*1024*1024)) -Dmapred.max.split.size=$(($SPLIT_SIZE*1024*1024))"
 export HDFS_FILE="/test/lineitem.tbl"
 export LOCAL_FILE="build/part.tbl"
