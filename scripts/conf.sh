@@ -5,8 +5,8 @@ export SPLIT_SIZE=184;
 export RESULT_APPEND=true
 export BUILD_TPCH=true
 
-export JAVA_MIN=$((3 * 1024 * 1024))
-export JAVA_MAX=$((3 * 1024 * 1024))
+export JAVA_MIN=$((3 * 1024 ))
+export JAVA_MAX=$((3 * 1024 ))
 
 export JAR_OPTS="-Dmapred.min.split.size=$(($SPLIT_SIZE*1024*1024)) -Dmapred.max.split.size=$(($SPLIT_SIZE*1024*1024))"
 export HDFS_FILE="/test/lineitem.tbl"
