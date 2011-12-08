@@ -26,7 +26,7 @@ public class PrimaryIndexS0 extends Base {
 			return b.primaryIndex()
 					.treePageSize(96 * 1024)
 					.addDefaultRange(new Range(-1, -1))
-					.cacheSize(20 * 1000 * 1000 + 100 * 1000)
+					.cacheSize(8000 * 1000)
 					.valueSerializer(StringCutSerializer.get(122));
 		}
 	}
