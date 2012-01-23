@@ -36,4 +36,4 @@ Here you can run a basic job with
 
 To initiate the performance tests, run
 
-    grade comparePerformance
+    gradle comparePerformance
